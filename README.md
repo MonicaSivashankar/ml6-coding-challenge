@@ -6,15 +6,15 @@ In this test, you will try to classify the mugs we drink from at ML6. If you are
 
 You can start by cloning this repository to a local and/or private location via:
 
-```
-git clone git@bitbucket.org:ml6team/challenge-find-ml6-mug.git
+```bash
+git clone https://bitbucket.org/ml6team/challenge-find-ml6-mug.git
 ```
 
 ## The Data
 
 Before you begin to implement your classification model you need to download the data used for training and local evaluation from Google Cloud Storage and place the `data` folder in the base folder. To download the data execute the following command (you will need to [install the `gsutil` command](https://cloud.google.com/storage/docs/gsutil_install#sdk-install) beforehand which is part of the *Google Cloud SDK*):
 
-```
+```bash
 gsutil -m cp -R gs://ml6_junior_ml_engineer_challenge_cv_mugs_data/data .
 ```
 
@@ -27,7 +27,7 @@ In the `trainer` folder, you will be able to see several Python files. The `data
 
 To test how your model is doing you can execute the following command (you will need to [install](https://cloud.google.com/sdk/docs/#install_the_latest_cloud_sdk_version) the `gcloud` command, which is also part of the *Google Cloud SDK*):
 
-```
+```bash
 gcloud ai-platform local train \
     --module-name trainer.task \
     --package-path trainer/ --
@@ -50,7 +50,7 @@ Once you've got the code working you will need to deploy the model to Google Clo
 
 To export your trained model and to train your model on the images in the `train` and `eval` folder you have to execute the following command (only do this once you've completed coding the `model.py` file):
 
-```
+```bash
 gcloud ai-platform local train \
     --module-name trainer.final_task \
     --package-path trainer/ --
@@ -67,7 +67,7 @@ Once you've created your Google Cloud account, you'll need to deploy your model 
 
 Before you submit your solution, you can check if your deployed model works correctly by executing the following commands:
 
-```
+```bash
 MODEL_NAME=<your_model_name>
 VERSION=<your_version_of_the_model>
 
