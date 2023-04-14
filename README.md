@@ -28,9 +28,7 @@ In the `trainer` folder, you will be able to see several Python files. The `data
 To test how your model is doing you can execute the following command (you will need to [install](https://cloud.google.com/sdk/docs/#install_the_latest_cloud_sdk_version) the `gcloud` command, which is also part of the *Google Cloud SDK*):
 
 ```bash
-gcloud ai-platform local train \
-    --module-name trainer.task \
-    --package-path trainer/ --
+python -m trainer.task
 ```
 
 If you run this command before you wrote any code in the `model.py` file, you will notice that it returns errors. Your goal is to write code that does not return errors and achieves an accuracy that is as high as possible.
@@ -51,16 +49,14 @@ Once you've got the code working you will need to deploy the model to Google Clo
 To export your trained model and to train your model on the images in the `train` and `eval` folder you have to execute the following command (only do this once you've completed coding the `model.py` file):
 
 ```bash
-gcloud ai-platform local train \
-    --module-name trainer.final_task \
-    --package-path trainer/ --
+python -m trainer.final_task
 ```
 
-Once you've executed this command, you will notice that the `output` folder was created in the root directory of this repository. This folder contains your saved model that you'll need to deploy to Google Cloud AI Platform.
+Once you've executed this command, you will notice that the `output` folder was created in the root directory of this repository. This folder contains your saved model that you'll need to deploy to Google Cloud Vertex ai.
 
-In order to do so you will need to create a [Google Cloud account](https://cloud.google.com/). You will need a credit card for this, but you'll get [free credit from Google](https://cloud.google.com/free/docs/gcp-free-tier/#free-trial) to run your AI Platform instance. **Note:** if you are not eligible for the free trial please reach out to us as you are responsible for the costs associated with the project.
+In order to do so you will need to create a [Google Cloud account](https://cloud.google.com/). You will need a credit card for this, but you'll get [free credit from Google](https://cloud.google.com/free/docs/gcp-free-tier/#free-trial) to run your Vertex AI instance. **Note:** if you are not eligible for the free trial please reach out to us as you are responsible for the costs associated with the project.
 
-Once you've created your Google Cloud account, you'll need to deploy your model on a project you've created. You can follow a [Google Guide](https://cloud.google.com/ai-platform/prediction/docs/deploying-models#deploy_models_and_versions) for this. Make sure to deploy the model using Tensorflow 2.7 and we advice to use **`europe-west1` as the regional endpoint** if available. Note that the region of the bucket should correspond to the region of the model.
+Once you've created your Google Cloud account, you'll need to deploy your model on a project you've created. You can follow a [Google Guide](https://cloud.google.com/ai-platform/prediction/docs/deploying-models#deploy_models_and_versions) for this. Make sure to deploy the model using Tensorflow 2.9 and we advise to use **`europe-west1` as the regional endpoint** if available. Note that the region of the bucket should correspond to the region of the model.
 
 
 ## Checking your Deployed Model
@@ -68,14 +64,13 @@ Once you've created your Google Cloud account, you'll need to deploy your model 
 Before you submit your solution, you can check if your deployed model works correctly by executing the following commands:
 
 ```bash
-MODEL_NAME=<your_model_name>
-VERSION=<your_version_of_the_model>
+ENDPOINT_ID=<your_endpoint_id>
+PROJECT_ID=<your_project_id>
 
-gcloud ai-platform predict \
-    --region europe-west1 \
-    --model $MODEL_NAME \
-    --version $VERSION \
-    --json-instances check_deployed_model/test.json
+gcloud ai endpoints predict $ENDPOINT_ID \
+    --project=$PROJECT_ID  \
+    --region=europe-west1 \
+    --json-request=check_deployed_model/test.json
 ```
 
 Check if you are able to get a prediction out of the `gcloud` command. If you get errors, you should try to resolve them before submitting the solution. The output of the command should look something like this (the numbers will probably be different):
@@ -85,7 +80,7 @@ CLASSES  PROBABILITIES
 1        [2.0589146706995187e-12, 1.0, 1.7370329621294728e-13, 1.2870057122347237e-32]
 ```
 
-The values you use for the `$MODEL_NAME` variable and the `$VERSION` variable can be found in your project on the Google Cloud web interface. You will need these values and your Google Cloud *Project ID* to submit your coding test.
+The value for the `$ENDPOINT_ID` variable can be found in your project on the Google Cloud web interface. You will need this value and your Google Cloud *Project ID* to submit your coding test.
 
 To be able to pass the coding test. You should be able to get an accuracy of 75% on our secret dataset of mugs (which you don't have access to). If your accuracy however seems to be less than 75% after we evaluated it, you can just keep submitting solutions until you are able to get an accuracy of 75%.
 
@@ -99,11 +94,11 @@ Once you are able to execute the command above without errors, you can add us to
 * Click *Add*
 * Add `ml6-coding-challenge-evaluator@recruiting-220608.iam.gserviceaccount.com`as a member with the role *Project Owner*
 
-After you added us to your project you should fill in [this form](https://docs.google.com/forms/d/e/1FAIpQLScW6ytY3_4yoKE39-Gd-U7WHo030YtwdggTG1D_yIQPlL7Vjg/viewform) so we are able to automatically evaluate your solution to the coding test. Once you've filled in the form you should receive an email with the results within 2 hours. We'll hope with you that your results are good enough to land an interview at ML6. If however you don't you can resubmit a new solution as many times as you want, so don't give up!
+After you added us to your project you should fill in [this form](https://docs.google.com/forms/d/e/1FAIpQLSd8gU-V8hEuldbEe-PfPmzmImLyekkzPOCEC8OKu_XAoW5_qg/viewform) so we are able to automatically evaluate your solution to the coding test. Once you've filled in the form you should receive an email with the results within 2 hours. We'll hope with you that your results are good enough to land an interview at ML6. If however you don't you can resubmit a new solution as many times as you want, so don't give up!
 
 If you are invited for an interview at ML6 afterwards, make sure to bring your laptop with a copy of the code you wrote, so you can explain your `model.py` file to us.
 
 
 ### Taking down the deployed model
 
-After you have received the evaluation email, we no longer require access to the model. Please check the corresponding documentation page for removing AI Platform models. This can be done via the UI or the command line.
+After you have received the evaluation email, we no longer require access to the model. Please check the corresponding documentation page for removing Vertex AI models. This can be done via the UI or the command line.
