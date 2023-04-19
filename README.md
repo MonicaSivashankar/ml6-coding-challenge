@@ -94,7 +94,7 @@ Once you are able to execute the command above without errors, you can add us to
 * Click *Add*
 * Add `ml6-coding-challenge-evaluator@recruiting-220608.iam.gserviceaccount.com`as a member with the role *Project Owner*
 
-After you added us to your project you should fill in [this form](https://docs.google.com/forms/d/e/1FAIpQLSd8gU-V8hEuldbEe-PfPmzmImLyekkzPOCEC8OKu_XAoW5_qg/viewform) so we are able to automatically evaluate your solution to the coding test. Once you've filled in the form you should receive an email with the results within 2 hours. We'll hope with you that your results are good enough to land an interview at ML6. If however you don't you can resubmit a new solution as many times as you want, so don't give up!
+After you added us to your project you should fill in [this form](https://docs.google.com/forms/d/e/1FAIpQLSdD1tYb3BNSc-MqUUB5my7FhONmSYyjWjyj9ZHVFBXPVHPdhA/viewform) so we are able to automatically evaluate your solution to the coding test. Once you've filled in the form you should receive an email with the results within 2 hours. We'll hope with you that your results are good enough to land an interview at ML6. If however you don't you can resubmit a new solution as many times as you want, so don't give up!
 
 If you are invited for an interview at ML6 afterwards, make sure to bring your laptop with a copy of the code you wrote, so you can explain your `model.py` file to us.
 
